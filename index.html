@@ -7,7 +7,7 @@
 <title>Sewing Repair Solutions</title>
 <link rel="icon" href="https://static.wixstatic.com/media/29bde3_dea096f34b0544fc982296956e493fe2~mv2.jpg/v1/fill/w_96,h_96,al_c,q_85,enc_auto/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Schibsted+Grotesk:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Reenie+Beanie&display=swap">
 <style>
 /* Layout: repair-shop ticket. Stitch-line dividers, a tape-measure rule under the hero,
    service cards cut like hang tags, a real 4-step pickup sequence, contact as a work order. */
@@ -15,9 +15,12 @@
   /* Original brand colors: mauve #A4798D, blue #2B5672, white, black */
   --bg:#FFFFFF; --surface:#FBF8F9; --ink:#141820; --muted:#555B66;
   --line:#E3D9DE; --accent:#2B5672; --accent-ink:#FFFFFF; --thread:#8A5F73; --mauve:#A4798D; --tag:#F5EDF1;
-  --display:"Young Serif", Georgia, "Times New Roman", serif;
-  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  /* Type: Gloock (vintage pattern-envelope serif), Schibsted Grotesk (body),
+     Courier Prime (typewritten repair tickets), Reenie Beanie (technician's handwriting) */
+  --display:"Gloock", "Bodoni 72", Didot, Georgia, serif;
+  --body:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono:"Courier Prime", "Courier New", Courier, monospace;
+  --hand:"Reenie Beanie", "Bradley Hand", "Segoe Print", cursive;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#15181F; --surface:#1D2129; --ink:#EEF0F4; --muted:#A9AEB9;
@@ -31,11 +34,11 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);margin:0}
 .wrap{max-width:1120px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left,0px));padding-right:max(20px, env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0}
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--thread);outline-offset:3px;border-radius:4px}
-.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--thread)}
+.eyebrow{font:700 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--thread)}
 .stitch{height:0;border:0;border-top:2px dashed var(--line);margin:0}
 
 /* Header */
@@ -87,7 +90,7 @@ section{padding-block:88px}
 .mission-grid .copy{display:grid;gap:18px;font-size:18px}
 .machines{display:grid;gap:0;border-top:2px dashed var(--line)}
 .machines div{display:flex;justify-content:space-between;gap:16px;padding-block:16px;border-bottom:2px dashed var(--line);font-weight:600}
-.machines div span{font:500 13px/1.6 var(--mono);color:var(--thread);white-space:nowrap}
+.machines div span{font:700 14px/1.6 var(--mono);color:var(--thread);white-space:nowrap}
 @media (max-width:860px){.mission-grid{grid-template-columns:1fr;gap:32px}}
 
 /* Services: hang tags */
@@ -96,16 +99,16 @@ section{padding-block:88px}
 .tag{background:var(--tag);border-radius:6px 6px 14px 14px;padding:34px 26px 28px;position:relative;display:grid;grid-template-rows:auto auto auto 1fr auto;gap:14px;min-width:0;
   clip-path:polygon(16% 0,84% 0,100% 7%,100% 100%,0 100%,0 7%)}
 .tag .hole{position:absolute;top:14px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 2px var(--line)}
-.tag .no{font:500 12px/1 var(--mono);letter-spacing:.12em;color:var(--muted);margin-top:10px}
+.tag .no{font:700 13px/1 var(--mono);letter-spacing:.12em;color:var(--muted);margin-top:10px}
 .tag h3{font-size:28px}
 .tag ul{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-size:15.5px}
 .tag li{display:grid;grid-template-columns:18px 1fr;gap:8px}
 .tag li::before{content:"";width:12px;height:12px;margin-top:6px;border:2px solid var(--thread);border-radius:3px}
-.tag .note{border-top:2px dashed var(--line);padding-top:14px;font-size:15px;font-style:italic;color:var(--ink)}
-.tag .note b{font-style:normal;color:var(--thread)}
+.tag .note{border-top:2px dashed var(--line);padding-top:14px;font:400 25px/1.05 var(--hand);color:var(--ink)}
+.tag .note b{font-weight:400;color:var(--thread)}
 @media (max-width:960px){.tags{grid-template-columns:1fr;max-width:560px}}
 .all{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;color:var(--muted);font-weight:600}
-.all .chip{font:500 13px/1 var(--mono);letter-spacing:.06em;padding:9px 12px;border-radius:999px;border:1.5px solid var(--thread);color:var(--thread)}
+.all .chip{font:700 13px/1 var(--mono);letter-spacing:.06em;padding:9px 12px;border-radius:999px;border:1.5px solid var(--thread);color:var(--thread)}
 
 /* Process */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;position:relative}
@@ -125,7 +128,7 @@ section{padding-block:88px}
 .order{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px dashed color-mix(in srgb,var(--bg) 30%,var(--ink));border-radius:14px}
 .field{padding:26px;display:grid;gap:10px;align-content:start;min-width:0}
 .field + .field{border-left:2px dashed color-mix(in srgb,var(--bg) 30%,var(--ink))}
-.field .lab{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--bg) 60%,var(--ink))}
+.field .lab{font:700 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--bg) 60%,var(--ink))}
 .field .val{font:400 clamp(20px,2.2vw,26px)/1.25 var(--display);overflow-wrap:anywhere;user-select:all}
 .field .val a{text-decoration:none}
 .copy-btn{justify-self:start;background:transparent;color:var(--bg);border:1.5px solid color-mix(in srgb,var(--bg) 40%,var(--ink));border-radius:999px;padding:6px 14px;font:600 13px/1 var(--body);cursor:pointer}

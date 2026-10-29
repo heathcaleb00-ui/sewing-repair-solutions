@@ -45,7 +45,9 @@
   --line:#353A46; --accent:#7FAFD0; --accent-ink:#0E1A24; --thread:#D3AFC0; --mauve:#C29AAD; --tag:#2A2228; color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
+#request{scroll-margin-top:90px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);margin:0}
 .wrap{max-width:1120px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left,0px));padding-right:max(20px, env(safe-area-inset-right,0px))}
@@ -336,6 +338,44 @@ img{max-width:100%;height:auto;display:block}
 @media (max-width:700px){.gallery a:first-child{grid-column:span 2}.gallery a:first-child img{aspect-ratio:4/3}}
 /* desktop nav now has six links: tighten spacing on smaller laptops */
 @media (min-width:901px) and (max-width:1120px){.links{gap:14px;font-size:14px}.links .btn.call .call-full{display:none}.links .btn.call .call-short{display:inline}}
+
+/* Intake form: a white repair ticket on the blue contact band */
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px;align-items:start}
+.details{display:grid;gap:18px;min-width:0}
+.details .order{grid-template-columns:1fr}
+.details .field + .field{border-left:0;border-top:2px dashed color-mix(in srgb,var(--bg) 30%,var(--ink))}
+.details .field .val.email{font-size:clamp(17px,1.6vw,21px)}
+.call-cta{justify-self:start;background:#fff;color:#2B5672;border:2px solid #fff}
+.ticket{background:#FFFFFF;color:#141820;border-radius:14px;padding:0 0 28px;position:relative;box-shadow:0 20px 40px rgba(10,25,40,.28);scroll-margin-top:90px}
+.ticket::before,.ticket::after{content:"";position:absolute;top:58px;width:22px;height:22px;border-radius:50%;background:#2B5672}
+.ticket::before{left:-11px}.ticket::after{right:-11px}
+.ticket-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;padding:22px 28px 20px;border-bottom:2px dashed #E3D9DE;margin-bottom:22px}
+.ticket-lab{font:700 13px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#2B5672}
+.ticket-no{font:400 22px/1 var(--hand);color:#8A5F73}
+.intake,.done{padding-inline:28px;display:grid;gap:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fld{display:grid;gap:7px;min-width:0}
+.fld label{font:600 15px/1.2 var(--body);color:#141820}
+.fld input,.fld textarea{width:100%;font:400 17px/1.4 var(--body);color:#141820;background:#FBF8F9;border:1.5px solid #D6C8CF;border-radius:10px;padding:12px 14px;min-height:48px;transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease}
+.fld textarea{resize:vertical;min-height:132px}
+.fld input::placeholder,.fld textarea::placeholder{color:#7A7F89}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:#2B5672;background:#fff;box-shadow:0 0 0 3px rgba(43,86,114,.18)}
+.fld input[aria-invalid="true"],.fld textarea[aria-invalid="true"]{border-color:#B3261E;box-shadow:0 0 0 3px rgba(179,38,30,.12)}
+.err{font:500 14px/1.3 var(--body);color:#B3261E;margin:0}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.submit{justify-self:start;font-size:17px;padding:14px 26px}
+.submit[disabled]{opacity:.7;cursor:progress}
+.form-note{font:500 14px/1.4 var(--body);color:#555B66;margin:0;min-height:1em}
+.form-note.bad{color:#B3261E}
+.done{justify-items:start;padding-block:8px 4px}
+.done h3{font-size:30px;color:#141820}
+.done p{color:#555B66}
+.done a{color:#2B5672;font-weight:700}
+.done .again{color:#2B5672;border-color:#C9D5DE;background:#fff}
+.done .again:hover{border-color:#2B5672}
+@media (max-width:1000px){.contact-grid{grid-template-columns:1fr}.ticket{max-width:680px}.details .order{grid-template-columns:repeat(3,minmax(0,1fr))}.details .field + .field{border-top:0;border-left:2px dashed color-mix(in srgb,var(--bg) 30%,var(--ink))}}
+@media (max-width:760px){.details .order{grid-template-columns:1fr}.details .field + .field{border-left:0;border-top:2px dashed color-mix(in srgb,var(--bg) 30%,var(--ink))}}
+@media (max-width:600px){.row2{grid-template-columns:1fr}.intake,.done{padding-inline:20px}.ticket-head{padding:18px 20px 16px}.submit,.call-cta{justify-self:stretch;justify-content:center}.ticket::before,.ticket::after{top:52px}}
 </style>
 </head>
 <body>
@@ -376,7 +416,7 @@ img{max-width:100%;height:auto;display:block}
         <h1>Get your baby working in <em>top condition.</em></h1>
         <p class="lede">We pick up your sewing machine, serger, or embroidery machine, service it in our repair facility, and deliver it back to your home. Pick-up and delivery are free.</p>
         <div class="ctas">
-          <a class="btn" href="#contact">Schedule a pick-up</a>
+          <a class="btn" href="#request">Schedule a pick-up</a>
           <a class="btn ghost" href="#services">See what's included</a>
         </div>
       </div>
@@ -567,8 +607,52 @@ img{max-width:100%;height:auto;display:block}
       <div class="head">
         <p class="eyebrow">Contact</p>
         <h2>Let us know how we can help you.</h2>
-        <p>Call or email to schedule your free pick-up.</p>
+        <p>Fill out the service request and we'll get back to you to schedule your free pick-up. Prefer to talk? Call us.</p>
       </div>
+      <div class="contact-grid">
+        <div class="ticket" id="request">
+          <div class="ticket-head">
+            <span class="ticket-lab">Service request</span>
+            <span class="ticket-no">Free pick-up &amp; delivery</span>
+          </div>
+          <form class="intake" id="intake" name="service-request" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="service-request">
+            <input type="hidden" name="subject" value="New service request from the website">
+            <p class="hp" aria-hidden="true"><label>Leave this empty: <input name="bot-field" id="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div class="row2">
+              <div class="fld">
+                <label for="first-name">First name</label>
+                <input id="first-name" name="first-name" type="text" autocomplete="given-name" maxlength="100" required>
+                <p class="err" id="first-name-err" hidden>Enter your first name.</p>
+              </div>
+              <div class="fld">
+                <label for="last-name">Last name</label>
+                <input id="last-name" name="last-name" type="text" autocomplete="family-name" maxlength="100" required>
+                <p class="err" id="last-name-err" hidden>Enter your last name.</p>
+              </div>
+            </div>
+            <div class="fld">
+              <label for="email-input">Email address</label>
+              <input id="email-input" name="email" type="email" autocomplete="email" inputmode="email" maxlength="250" required>
+              <p class="err" id="email-input-err" hidden>Enter an email address like name@example.com.</p>
+            </div>
+            <div class="fld">
+              <label for="service-needed">What service do you need?</label>
+              <textarea id="service-needed" name="service-needed" rows="5" maxlength="2000" required placeholder="Your machine's brand and type, and what it's doing. For example: Brother embroidery machine, thread keeps bunching under the fabric."></textarea>
+              <p class="err" id="service-needed-err" hidden>Tell us briefly what your machine needs.</p>
+            </div>
+            <button class="btn submit" type="submit" id="intake-submit">Send service request</button>
+            <p class="form-note" id="intake-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="done" id="intake-done" hidden tabindex="-1">
+            <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--thread)"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3 id="done-title">Thanks! Your request is in.</h3>
+            <p class="done-note">We'll reach out soon to set up your free pick-up.</p>
+            <p>Need us sooner? Call <a href="tel:2146935931">(214) 693-5931</a>.</p>
+            <button class="copy-btn again" type="button" id="intake-again">Send another request</button>
+          </div>
+        </div>
+        <div class="details">
       <div class="order">
         <div class="field">
           <span class="lab">Call</span>
@@ -585,9 +669,8 @@ img{max-width:100%;height:auto;display:block}
           <span class="val">PO Box 541463<br>Grand Prairie, Texas 75054</span>
         </div>
       </div>
-      <div class="contact-cta">
-        <a class="btn" href="tel:2146935931">Call to schedule a pick-up</a>
-        <a class="btn ghost" href="mailto:sewingrepairsolutions@gmail.com">Send an email</a>
+          <a class="btn call-cta" href="tel:2146935931">Call to schedule a pick-up</a>
+        </div>
       </div>
     </div>
   </section>
@@ -639,6 +722,40 @@ document.querySelectorAll('.copy-btn').forEach(function(b){
   dlg.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)});
   dlg.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
   dlg.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(dx<0?i+1:i-1);x0=null});
+})();
+
+(function(){
+  var form=document.getElementById('intake'); if(!form) return;
+  var done=document.getElementById('intake-done'), status=document.getElementById('intake-status'), btn=document.getElementById('intake-submit');
+  var fields=['first-name','last-name','email-input','service-needed'].map(function(id){return document.getElementById(id)});
+  function check(el){
+    var v=el.value.trim(), ok=v.length>0;
+    if(ok&&el.type==='email') ok=/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,63}$/.test(v);
+    el.setAttribute('aria-invalid',ok?'false':'true');
+    var e=document.getElementById(el.id+'-err'); e.hidden=ok;
+    if(ok) el.removeAttribute('aria-describedby'); else el.setAttribute('aria-describedby',e.id);
+    return ok;
+  }
+  fields.forEach(function(el){
+    el.addEventListener('blur',function(){if(el.value.trim())check(el)});
+    el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')check(el)});
+  });
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var bad=fields.filter(function(el){return !check(el)});
+    if(bad.length){status.className='form-note bad';status.textContent='Please fix the highlighted fields.';bad[0].focus();return}
+    btn.disabled=true;btn.textContent='Sending…';status.className='form-note';status.textContent='';
+    var body=new URLSearchParams(new FormData(form)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+      .then(function(r){if(!r.ok)throw new Error(r.status);
+        var name=document.getElementById('first-name').value.trim();
+        document.getElementById('done-title').textContent=name?('Thanks, '+name+'! Your request is in.'):'Thanks! Your request is in.';
+        form.hidden=true;done.hidden=false;done.focus();form.reset();
+      })
+      .catch(function(){status.className='form-note bad';status.textContent="We couldn't send your request. Check your connection and try again, or call (214) 693-5931."})
+      .then(function(){btn.disabled=false;btn.textContent='Send service request'});
+  });
+  document.getElementById('intake-again').addEventListener('click',function(){done.hidden=true;form.hidden=false;fields.forEach(function(el){el.removeAttribute('aria-invalid')});fields[0].focus()});
 })();
 </script>
 </body>
